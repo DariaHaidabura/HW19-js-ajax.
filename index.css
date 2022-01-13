@@ -1,0 +1,17 @@
+ul {
+  float: right;
+  margin-left: 20px;
+  font-size: large;
+}
+
+div#images {
+  float: left;
+}
+
+img {
+  margin-left: 30%;
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+}
