@@ -3,26 +3,35 @@ let selectedImages = document.getElementById('images');
 
 async function getAlbums() {
   let albums = await fetch('https://jsonplaceholder.typicode.com/albums');
-  let albumsArray = await albums.json();
-  selectedAlbum.innerHTML = albumsArray.map(item => {
+  return albumsArray = await albums.json();
+}
+
+function showAlbums(albumsArr) {
+  selectedAlbum.innerHTML = albumsArr.map(item => {
     let li = `<li><a href name=${item.id}><h4>album №${item.id}</a></h4>${item.title}</li>`;
     return li;
-  }).join('')
+  }).join('');
 }
 
-async function showImages(id) {
+async function getImages(id) {
   let images = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${id}`);
-  let imagesArray = await images.json();
-  selectedImages.innerHTML = imagesArray.map(img => {
+  return imagesArray = await images.json();
+}
+
+function showImages(imagesArr) {
+  selectedImages.innerHTML = imagesArr.map(img => {
     let image = `<img src="${img.url}"></img>`;
     return image;
-  }).join('')
+  }).join('');
 }
 
-getAlbums().then(() => showImages(1));
+getAlbums().then((albumsArr) => showAlbums(albumsArr));
+getImages(1).then((imagesArr) => showImages(imagesArr));
 
 selectedAlbum.addEventListener('click', (e) =>  {
   e.preventDefault();
   e.stopPropagation();
-  showImages(e.target.name) 
+  getImages(e.target.name).then((imagesArr) => showImages(imagesArr));
 })
+
+
